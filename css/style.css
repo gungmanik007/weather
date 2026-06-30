@@ -3,6 +3,10 @@
     padding: 0;
     box-sizing: border-box;
 }
+/* 
+  CSS untuk aplikasi cuaca yang modern dan responsif. 
+  Menggunakan gradien warna, animasi halus, dan desain yang bersih untuk meningkatkan pengalaman pengguna.
+/* Sumber inspirasi: Dribbble, Behance, dan berbagai template UI modern. */
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -13,7 +17,8 @@ body {
     justify-content: center;
     padding: 20px;
 }
-
+/*fungsi dari body untuk mengatur font, background, dan tata letak keseluruhan halaman. Menggunakan flexbox untuk memusatkan konten secara vertikal dan horizontal.*/
+/*sumber https://developer.mozilla.org/en-US/docs/Web/CSS/body */
 .container {
     background: rgba(255, 255, 255, 0.95);
     border-radius: 20px;
@@ -23,6 +28,8 @@ body {
     width: 100%;
     animation: slideIn 0.5s ease-out;
 }
+/*fungsi dari container untuk memberikan latar belakang putih dengan transparansi, sudut melengkung, bayangan, dan padding. Juga mengatur lebar maksimum dan animasi masuk.*/
+/* sumber https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow untuk membuat bayangan pada elemen dan https://developer.mozilla.org/en-US/docs/Web/CSS/animation untuk membuat animasi pada elemen. */
 
 @keyframes slideIn {
     from {
@@ -34,11 +41,17 @@ body {
         transform: translateY(0);
     }
 }
+/*fungsi dari keyframes slideIn untuk membuat animasi masuk dengan efek memudar dan bergerak ke atas. */
+/* sumber https://developer.mozilla.org/en-US/docs/Web/CSS/@keyframes untuk membuat animasi dengan keyframes. */
+
 
 header {
     text-align: center;
     margin-bottom: 30px;
 }
+/*fungsi dari header untuk mengatur teks di dalamnya agar berada di tengah dan memberikan jarak bawah. */
+/* sumber https://developer.mozilla.org/en-US/docs/Web/CSS/text-align untuk mengatur perataan teks dan https://developer.mozilla.org/en-US/docs/Web/CSS/margin untuk mengatur jarak di sekitar elemen. */
+
 
 header h1 {
     color: #333;
@@ -50,12 +63,18 @@ header p {
     color: #777;
     font-size: 0.95em;
 }
+/*fungsi dari header h1 untuk mengatur warna, ukuran font, dan jarak bawah dari judul. Sedangkan header p untuk mengatur warna dan ukuran font dari deskripsi. */
+/* sumber https://developer.mozilla.org/en-US/docs/Web/CSS/color untuk mengatur warna teks dan https://developer.mozilla.org/en-US/docs/Web/CSS/font-size untuk mengatur ukuran font. */
+
 
 .search-section {
     display: flex;
     gap: 10px;
     margin-bottom: 20px;
 }
+/*fungsi dari search-section untuk mengatur tata letak input pencarian dan tombol menggunakan flexbox, memberikan jarak antar elemen, dan jarak bawah. */
+/* sumber https://developer.mozilla.org/en-US/docs/Web/CSS/display untuk mengatur jenis tampilan elemen dan https://developer.mozilla.org/en-US/docs/Web/CSS/gap untuk mengatur jarak antar elemen dalam flexbox. */
+
 
 .search-input {
     flex: 1;
@@ -65,11 +84,16 @@ header p {
     font-size: 1em;
     transition: border-color 0.3s;
 }
+/*fungsi dari search-input untuk mengatur lebar input agar fleksibel, memberikan padding, border, sudut melengkung, ukuran font, dan transisi untuk perubahan warna border. */
+/* sumber https://developer.mozilla.org/en-US/docs/Web/CSS/flex untuk mengatur fleksibilitas elemen dalam flexbox dan https://developer.mozilla.org/en-US/docs/Web/CSS/transition untuk mengatur transisi pada perubahan properti CSS. */
 
 .search-input:focus {
     outline: none;
     border-color: #667eea;
 }
+/*fungsi dari search-input:focus untuk menghilangkan outline default saat input fokus dan mengubah warna border menjadi biru. */
+/* sumber https://developer.mozilla.org/en-US/docs/Web/CSS/:focus untuk mengatur gaya elemen saat dalam keadaan fokus. */
+
 
 .search-btn {
     padding: 12px 24px;
@@ -82,15 +106,23 @@ header p {
     cursor: pointer;
     transition: transform 0.2s, box-shadow 0.2s;
 }
+/*fungsi dari search-btn untuk mengatur padding, latar belakang dengan gradien, warna teks, border, sudut melengkung, ukuran font, ketebalan font, kursor pointer, dan transisi untuk transformasi dan bayangan. */
+/* sumber https://developer.mozilla.org/en-US/docs/Web/CSS/cursor untuk mengatur jenis kursor saat hover dan https://developer.mozilla.org/en-US/docs/Web/CSS/transition untuk mengatur transisi pada perubahan properti CSS. */
+
 
 .search-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
 }
+/*fungsi dari search-btn:hover untuk memberikan efek hover dengan mengangkat tombol sedikit dan menambahkan bayangan. */
+/* sumber https://developer.mozilla.org/en-US/docs/Web/CSS/:hover untuk mengatur gaya elemen saat dalam keadaan hover. */
+
 
 .search-btn:active {
     transform: translateY(0);
-}
+}/*fungsi dari search-btn:active untuk mengembalikan tombol ke posisi semula saat ditekan. */
+/* sumber https://developer.mozilla.org/en-US/docs/Web/CSS/:active untuk mengatur gaya elemen saat dalam keadaan aktif (ditekan). */
+
 
 .error-message {
     background: #fee;
@@ -101,21 +133,32 @@ header p {
     border-left: 4px solid #c33;
     display: none;
 }
+/*fungsi dari error-message untuk mengatur tampilan pesan error dengan latar belakang merah muda, warna teks merah, padding, sudut melengkung, jarak bawah, border kiri yang mencolok, dan menyembunyikan elemen secara default. */
+/* sumber https://developer.mozilla.org/en-US/docs/Web/CSS/border untuk mengatur border pada elemen dan https://developer.mozilla.org/en-US/docs/Web/CSS/display untuk mengatur tampilan elemen. */
+
 
 .error-message.show {
     display: block;
     animation: shake 0.5s;
 }
+/*fungsi dari error-message.show untuk menampilkan pesan error dengan animasi shake. */
+/* sumber https://developer.mozilla.org/en-US/docs/Web/CSS/animation untuk mengatur animasi pada elemen. */
 
 @keyframes shake {
     0%, 100% { transform: translateX(0); }
     25% { transform: translateX(-10px); }
     75% { transform: translateX(10px); }
 }
+/*fungsi dari keyframes shake untuk membuat animasi goyang horizontal. */
+/* sumber https://developer.mozilla.org/en-US/docs/Web/CSS/@keyframes untuk membuat animasi dengan keyframes. */
+
 
 .weather-container {
     animation: fadeIn 0.5s ease-out;
 }
+/*fungsi dari weather-container untuk memberikan animasi fadeIn saat kontainer cuaca muncul. */
+/* sumber https://developer.mozilla.org/en-US/docs/Web/CSS/animation untuk mengatur animasi pada elemen. */
+
 
 @keyframes fadeIn {
     from {
@@ -125,10 +168,14 @@ header p {
         opacity: 1;
     }
 }
+/*fungsi dari keyframes fadeIn untuk membuat animasi memudar masuk. */
+/* sumber https://developer.mozilla.org/en-US/docs/Web/CSS/@keyframes untuk membuat animasi dengan keyframes. */
 
 .weather-container.hidden {
     display: none;
 }
+/*  fungsi dari weather-container.hidden untuk menyembunyikan kontainer cuaca saat tidak diperlukan. */
+/* sumber https://developer.mozilla.org/en-US/docs/Web/CSS/display untuk mengatur tampilan elemen. */
 
 .weather-main {
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -138,17 +185,23 @@ header p {
     margin-bottom: 20px;
     text-align: center;
 }
-
+/*fungsi dari weather-main untuk memberikan latar belakang dengan gradien, warna teks putih, padding, sudut melengkung, jarak bawah, dan perataan teks di tengah. */
+/* sumber https://developer.mozilla.org/en-US/docs/Web/CSS/background untuk mengatur latar belakang elemen dan https://developer.mozilla.org/en-US/docs/Web/CSS/text-align untuk mengatur perataan teks. */
 .city-info h2 {
     font-size: 2em;
     margin-bottom: 5px;
 }
+/*fungsi dari city-info h2 untuk mengatur ukuran font dan jarak bawah dari nama kota. */
+/* sumber https://developer.mozilla.org/en-US/docs/Web/CSS/font-size untuk mengatur ukuran font dan https://developer.mozilla.org/en-US/docs/Web/CSS/margin untuk mengatur jarak di sekitar elemen. */
 
 .date {
     font-size: 0.9em;
     opacity: 0.9;
     margin-bottom: 20px;
 }
+/*fungsi dari date untuk mengatur ukuran font, tingkat transparansi, dan jarak bawah dari tanggal. */
+/* sumber https://developer.mozilla.org/en-US/docs/Web/CSS/font-size untuk mengatur ukuran font, https://developer.mozilla.org/en-US/docs/Web/CSS/opacity untuk mengatur tingkat transparansi, dan https://developer.mozilla.org/en-US/docs/Web/CSS/margin untuk mengatur jarak di sekitar elemen. */
+
 
 .temperature-section {
     display: flex;
@@ -157,28 +210,34 @@ header p {
     gap: 20px;
     margin-bottom: 20px;
 }
+/*fungsi dari temperature-section untuk mengatur tampilan bagian suhu dengan flexbox, perataan elemen, dan jarak bawah. */
+/* sumber https://developer.mozilla.org/en-US/docs/Web/CSS/display untuk mengatur tampilan elemen dan https://developer.mozilla.org/en-US/docs/Web/CSS/gap untuk mengatur jarak antar elemen. */
 
 .temperature {
     display: flex;
     align-items: flex-start;
 }
+/*fungsi dari temperature untuk mengatur tampilan suhu dengan flexbox dan perataan elemen ke atas. */
+/* sumber https://developer.mozilla.org/en-US/docs/Web/CSS/display untuk mengatur tampilan elemen dan https://developer.mozilla.org/en-US/docs/Web/CSS/align-items untuk mengatur perataan elemen dalam flexbox. */
 
 .temp-value {
     font-size: 4em;
     font-weight: bold;
 }
-
+/*fungsi dari temp-value untuk mengatur ukuran font yang besar dan ketebalan font untuk menonjolkan nilai suhu. */
+/* sumber https://developer.mozilla.org/en-US/docs/Web/CSS/font-size untuk mengatur ukuran font dan https://developer.mozilla.org/en-US/docs/Web/CSS/font-weight untuk mengatur ketebalan font. */
 .temp-unit {
     font-size: 1.5em;
     margin-top: 10px;
 }
-
+/*fungsi dari temp-unit untuk mengatur ukuran font dan jarak atas dari unit suhu. */
+/* sumber https://developer.mozilla.org/en-US/docs/Web/CSS/font-size untuk mengatur ukuran font dan https://developer.mozilla.org/en-US/docs/Web/CSS/margin untuk mengatur jarak di sekitar elemen. */
 .weather-icon img {
     width: 100px;
     height: 100px;
     filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
 }
-
+/
 .weather-description {
     margin-top: 15px;
 }
