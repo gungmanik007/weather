@@ -232,6 +232,156 @@
       .temp-number { font-size: 3rem; }
       .header h1 { font-size: 2rem; }
     }
+
+    /* ============================================= */
+    /* CHATBOT WIDGET */
+    /* ============================================= */
+    .chat-toggle {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      border: none;
+      background: linear-gradient(135deg, #fbbf24, #f59e0b);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+      cursor: pointer;
+      font-size: 1.6rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      transition: all 0.3s;
+    }
+    .chat-toggle:hover { transform: scale(1.08); }
+    .chat-toggle .badge {
+      position: absolute;
+      top: -2px; right: -2px;
+      width: 14px; height: 14px;
+      background: #ef4444;
+      border-radius: 50%;
+      border: 2px solid #0c4a6e;
+    }
+    .chat-window {
+      position: fixed;
+      bottom: 96px;
+      right: 24px;
+      width: 340px;
+      max-width: calc(100vw - 32px);
+      height: 460px;
+      max-height: calc(100vh - 140px);
+      background: rgba(12,74,110,0.85);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 20px;
+      box-shadow: var(--shadow);
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      z-index: 1000;
+      animation: fadeUp 0.3s ease;
+    }
+    .chat-window.open { display: flex; }
+    .chat-header {
+      padding: 16px 18px;
+      background: rgba(255,255,255,0.08);
+      border-bottom: 1px solid var(--glass-border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .chat-header .title { color: white; font-weight: 700; font-size: 0.95rem; }
+    .chat-header .subtitle { color: rgba(255,255,255,0.55); font-size: 0.7rem; margin-top: 2px; }
+    .chat-close {
+      background: none; border: none; color: rgba(255,255,255,0.6);
+      font-size: 1.2rem; cursor: pointer; line-height: 1;
+      padding: 4px;
+    }
+    .chat-close:hover { color: white; }
+    .chat-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .chat-body::-webkit-scrollbar { width: 5px; }
+    .chat-body::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.2); border-radius: 10px; }
+    .chat-msg {
+      max-width: 82%;
+      padding: 10px 14px;
+      border-radius: 14px;
+      font-size: 0.85rem;
+      line-height: 1.4;
+      animation: fadeUp 0.25s ease;
+    }
+    .chat-msg.bot {
+      align-self: flex-start;
+      background: rgba(255,255,255,0.12);
+      color: #f0f9ff;
+      border-bottom-left-radius: 4px;
+    }
+    .chat-msg.user {
+      align-self: flex-end;
+      background: linear-gradient(135deg, #fbbf24, #f59e0b);
+      color: #0c4a6e;
+      font-weight: 600;
+      border-bottom-right-radius: 4px;
+    }
+    .chat-suggestions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      padding: 0 16px 12px;
+    }
+    .chip {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid var(--glass-border);
+      color: rgba(255,255,255,0.85);
+      font-size: 0.72rem;
+      padding: 6px 10px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-family: 'Sora', sans-serif;
+    }
+    .chip:hover { background: rgba(255,255,255,0.2); }
+    .chat-input-area {
+      display: flex;
+      gap: 8px;
+      padding: 12px;
+      border-top: 1px solid var(--glass-border);
+    }
+    .chat-input-area input {
+      flex: 1;
+      padding: 10px 14px;
+      border-radius: 12px;
+      border: 1px solid var(--glass-border);
+      background: rgba(255,255,255,0.1);
+      color: white;
+      font-family: 'Sora', sans-serif;
+      font-size: 0.85rem;
+      outline: none;
+    }
+    .chat-input-area input::placeholder { color: rgba(255,255,255,0.45); }
+    .chat-input-area input:focus { border-color: #fbbf24; }
+    .chat-send {
+      width: 40px; height: 40px;
+      border-radius: 12px;
+      border: none;
+      background: linear-gradient(135deg, #fbbf24, #f59e0b);
+      color: #0c4a6e;
+      font-weight: 700;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .chat-send:hover { filter: brightness(1.05); }
+    @media (max-width: 600px) {
+      .chat-window { right: 16px; bottom: 88px; width: calc(100vw - 32px); }
+      .chat-toggle { right: 16px; bottom: 16px; }
+    }
   </style>
 </head>
 <body>
@@ -357,6 +507,35 @@
     </div>
   </div>
 
+  <!-- ============================================= -->
+  <!-- CHATBOT WIDGET -->
+  <!-- ============================================= -->
+  <button class="chat-toggle" id="chatToggle">
+    💬
+    <span class="badge"></span>
+  </button>
+
+  <div class="chat-window" id="chatWindow">
+    <div class="chat-header">
+      <div>
+        <div class="title">🤖 Asisten Cuaca</div>
+        <div class="subtitle">Tanya apa saja soal cuaca hari ini</div>
+      </div>
+      <button class="chat-close" id="chatClose">✕</button>
+    </div>
+    <div class="chat-body" id="chatBody"></div>
+    <div class="chat-suggestions" id="chatSuggestions">
+      <button class="chip" data-q="Perlu bawa payung gak?">☔ Bawa payung?</button>
+      <button class="chip" data-q="Enaknya pakai jaket gak?">🧥 Pakai jaket?</button>
+      <button class="chip" data-q="Cocok buat jemur baju gak?">👕 Jemur baju?</button>
+      <button class="chip" data-q="Cuaca hari ini gimana?">📋 Ringkasan cuaca</button>
+    </div>
+    <div class="chat-input-area">
+      <input type="text" id="chatInput" placeholder="Tulis pertanyaan..."/>
+      <button class="chat-send" id="chatSend">➤</button>
+    </div>
+  </div>
+
   <script>
     // =============================================
     // KONFIGURASI API - OpenWeatherMap
@@ -463,7 +642,10 @@
     // =============================================
     // RENDER CUACA SAAT INI
     // =============================================
+    let lastWeatherData = null; // dipakai oleh chatbot
+
     function renderCurrentWeather(d) {
+      lastWeatherData = d;
       const offset = d.timezone; // offset detik dari UTC
 
       document.getElementById('cityName').textContent     = `${d.name}, ${d.sys.country}`;
@@ -534,6 +716,152 @@
       searchInput.value = 'Denpasar';
       fetchWeather('Denpasar');
     });
+
+    // =============================================
+    // CHATBOT — RULE-BASED, PAKAI DATA CUACA TERKINI
+    // =============================================
+    const chatToggle    = document.getElementById('chatToggle');
+    const chatWindow     = document.getElementById('chatWindow');
+    const chatClose      = document.getElementById('chatClose');
+    const chatBody       = document.getElementById('chatBody');
+    const chatInput      = document.getElementById('chatInput');
+    const chatSend       = document.getElementById('chatSend');
+    const chatSuggestions= document.getElementById('chatSuggestions');
+
+    let chatOpened = false;
+
+    chatToggle.addEventListener('click', () => {
+      chatWindow.classList.toggle('open');
+      if (!chatOpened && chatWindow.classList.contains('open')) {
+        chatOpened = true;
+        addBotMessage(`Halo! 👋 Aku asisten cuaca. Tanya aku soal kondisi cuaca di <b>${lastWeatherData ? lastWeatherData.name : 'kota yang sedang ditampilkan'}</b> ya, atau klik salah satu saran di bawah.`);
+      }
+    });
+    chatClose.addEventListener('click', () => chatWindow.classList.remove('open'));
+
+    chatSuggestions.addEventListener('click', (e) => {
+      const chip = e.target.closest('.chip');
+      if (!chip) return;
+      const q = chip.dataset.q;
+      addUserMessage(q);
+      respondTo(q);
+    });
+
+    chatSend.addEventListener('click', sendChat);
+    chatInput.addEventListener('keypress', e => { if (e.key === 'Enter') sendChat(); });
+
+    function sendChat() {
+      const msg = chatInput.value.trim();
+      if (!msg) return;
+      addUserMessage(msg);
+      chatInput.value = '';
+      respondTo(msg);
+    }
+
+    function addUserMessage(text) {
+      const el = document.createElement('div');
+      el.className = 'chat-msg user';
+      el.textContent = text;
+      chatBody.appendChild(el);
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }
+
+    function addBotMessage(html) {
+      const el = document.createElement('div');
+      el.className = 'chat-msg bot';
+      el.innerHTML = html;
+      chatBody.appendChild(el);
+      chatBody.scrollTop = chatBody.scrollHeight;
+    }
+
+    function respondTo(rawMsg) {
+      // simulasi "mengetik" sebentar biar berasa natural
+      setTimeout(() => {
+        addBotMessage(generateAnswer(rawMsg.toLowerCase()));
+      }, 400);
+    }
+
+    function generateAnswer(msg) {
+      if (!lastWeatherData) {
+        return 'Data cuaca belum tersedia. Coba cari kota dulu di kolom pencarian ya.';
+      }
+
+      const d = lastWeatherData;
+      const temp = Math.round(d.main.temp);
+      const feels = Math.round(d.main.feels_like);
+      const humidity = d.main.humidity;
+      const windKmh = (d.wind.speed * 3.6).toFixed(1);
+      const cond = d.weather[0].main.toLowerCase();   // contoh: rain, clouds, clear
+      const desc = d.weather[0].description;
+      const city = `${d.name}, ${d.sys.country}`;
+
+      const isRain  = cond.includes('rain') || cond.includes('drizzle') || cond.includes('thunderstorm');
+      const isCloud = cond.includes('cloud');
+      const isClear = cond.includes('clear');
+
+      // --- payung / hujan ---
+      if (/payung|hujan|gerimis/.test(msg)) {
+        if (isRain) {
+          return `Iya, sebaiknya bawa payung ☔ Cuaca di <b>${city}</b> saat ini <b>${desc}</b>, jadi cukup berisiko kehujanan.`;
+        }
+        if (isCloud) {
+          return `Saat ini di <b>${city}</b> kondisinya <b>${desc}</b> — belum hujan, tapi gak ada salahnya bawa payung lipat untuk jaga-jaga ☁️`;
+        }
+        return `Gak perlu kayaknya 😊 Langit di <b>${city}</b> sedang <b>${desc}</b>, kecil kemungkinan hujan hari ini.`;
+      }
+
+      // --- jaket / dingin ---
+      if (/jaket|dingin|sweater|hangat/.test(msg)) {
+        if (temp <= 20) {
+          return `Sebaiknya pakai jaket 🧥 Suhu di <b>${city}</b> sekitar <b>${temp}°C</b> (terasa ${feels}°C), cukup dingin.`;
+        }
+        if (temp <= 26) {
+          return `Opsional sih — suhu di <b>${city}</b> sekitar <b>${temp}°C</b>, masih nyaman tanpa jaket, tapi kalau kamu gampang kedinginan boleh bawa jaket tipis.`;
+        }
+        return `Gak perlu jaket, suhu di <b>${city}</b> lagi <b>${temp}°C</b> (terasa ${feels}°C), cenderung hangat/panas 🌤️`;
+      }
+
+      // --- jemur baju ---
+      if (/jemur|laundry|cuci baju/.test(msg)) {
+        if (isRain) {
+          return `Kurang ideal buat jemur baju hari ini ⚠️ Cuaca di <b>${city}</b> <b>${desc}</b> dan kelembaban ${humidity}%, baju bisa lama keringnya atau malah basah lagi.`;
+        }
+        if (isClear && humidity < 70) {
+          return `Cocok banget! ☀️ Langit di <b>${city}</b> <b>${desc}</b> dengan kelembaban ${humidity}%, baju bakal cepat kering.`;
+        }
+        return `Lumayan, kondisi di <b>${city}</b> <b>${desc}</b> dengan kelembaban ${humidity}%. Bisa dijemur tapi mungkin agak lebih lama keringnya.`;
+      }
+
+      // --- panas / suhu ---
+      if (/panas|suhu|temperatur|berapa derajat/.test(msg)) {
+        return `Suhu saat ini di <b>${city}</b> adalah <b>${temp}°C</b>, terasa seperti <b>${feels}°C</b>. Kondisi langit: ${desc}.`;
+      }
+
+      // --- angin ---
+      if (/angin|berangin/.test(msg)) {
+        return `Kecepatan angin di <b>${city}</b> sekitar <b>${windKmh} km/h</b>. ${windKmh > 20 ? 'Lumayan kencang, hati-hati kalau naik motor ya 🏍️' : 'Masih tergolong tenang dan nyaman 🍃'}`;
+      }
+
+      // --- kelembaban ---
+      if (/lembab|kelembaban|humid/.test(msg)) {
+        return `Kelembaban udara di <b>${city}</b> saat ini <b>${humidity}%</b>. ${humidity > 80 ? 'Cukup tinggi, badan bisa terasa lebih gerah dari suhu aslinya.' : 'Masih dalam rentang nyaman.'}`;
+      }
+
+      // --- aktivitas outdoor umum ---
+      if (/keluar rumah|olahraga|jalan-jalan|piknik|outdoor/.test(msg)) {
+        if (isRain) {
+          return `Kurang disarankan keluar dulu, di <b>${city}</b> kondisinya <b>${desc}</b>. Tunggu reda dulu ya, atau siapkan jas hujan/payung.`;
+        }
+        return `Aman kok buat beraktivitas di luar! Cuaca di <b>${city}</b> sedang <b>${desc}</b> dengan suhu ${temp}°C.`;
+      }
+
+      // --- ringkasan umum / fallback ---
+      if (/cuaca|gimana|bagaimana|kondisi|ringkasan/.test(msg)) {
+        return `Di <b>${city}</b> hari ini: <b>${desc}</b>, suhu <b>${temp}°C</b> (terasa ${feels}°C), kelembaban ${humidity}%, angin ${windKmh} km/h. ${isRain ? 'Siapkan payung ya ☔' : isClear ? 'Cerah, cocok buat aktivitas luar 🌤️' : 'Cukup nyaman untuk beraktivitas ☁️'}`;
+      }
+
+      return `Hmm, aku belum punya jawaban spesifik untuk itu 🤔 Tapi ini ringkasan cuaca di <b>${city}</b>: <b>${desc}</b>, suhu ${temp}°C, kelembaban ${humidity}%. Coba tanya soal payung, jaket, jemur baju, suhu, atau angin ya!`;
+    }
   </script>
 </body>
 </html>
